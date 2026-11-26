@@ -1,0 +1,35 @@
+:root {
+  /* Brand colors */
+  --color-primary: #2563eb;
+  --color-primary-hover: #1d4ed8;
+
+  /* Text colors */
+  --color-heading: #171717;
+  --color-body: #525252;
+  --color-muted: #737373;
+
+  /* Background colors */
+  --color-background: #ffffff;
+  --color-surface: #f9fafb;
+
+  /* Border */
+  --color-border: #e5e7eb;
+
+  /* Layout */
+  --container-width: 1280px;
+
+  /* Border radius */
+  --radius-card: 12px;
+}
+
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  font-family: Inter, system-ui, sans-serif;
+}
