@@ -1,5 +1,4 @@
 import { useState } from "react";
-import type { Dispatch, SetStateAction } from "react";
 import type { Product } from "../../types/product";
 import ProductFilters from "./ProductFilters";
 import ProductGrid from "./ProductGrid";

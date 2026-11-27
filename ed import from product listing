@@ -1,0 +1,10 @@
+[1mdiff --git a/src/components/products/ProductListingLayout.tsx b/src/components/products/ProductListingLayout.tsx[m
+[1mindex aef3549..2f06c03 100644[m
+[1m--- a/src/components/products/ProductListingLayout.tsx[m
+[1m+++ b/src/components/products/ProductListingLayout.tsx[m
+[36m@@ -1,5 +1,4 @@[m
+ import { useState } from "react";[m
+[31m-import type { Dispatch, SetStateAction } from "react";[m
+ import type { Product } from "../../types/product";[m
+ import ProductFilters from "./ProductFilters";[m
+ import ProductGrid from "./ProductGrid";[m
