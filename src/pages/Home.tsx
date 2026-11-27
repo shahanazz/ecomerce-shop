@@ -110,20 +110,20 @@ export const Home = () => {
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <ProductListingLayout
-  products={filteredProducts}
-  addToCart={addToCart}
-  loading={loading}
-  error={error}
-  selectedCategory={selectedCategory}
-  setSelectedCategory={setSelectedCategory}
-  selectedRating={selectedRating}
-  setSelectedRating={setSelectedRating}
-  priceRange={priceRange}
-  setPriceRange={setPriceRange}
-  sortOption={sortOption}
-  setSortOption={setSortOption}
-/>
+      <ProductListingLayout
+        products={filteredProducts}
+        addToCart={addToCart}
+        loading={loading}
+        error={error}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+        selectedRating={selectedRating}
+        setSelectedRating={setSelectedRating}
+        priceRange={priceRange}
+        setPriceRange={setPriceRange}
+        sortOption={sortOption}
+        setSortOption={setSortOption}
+      />
     </div>
   );
 };

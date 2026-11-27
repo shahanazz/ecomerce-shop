@@ -1,5 +1,4 @@
-
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import {
   ArrowLeft,
   Minus,
@@ -7,33 +6,27 @@ import {
   ShoppingBag,
   Trash2,
   ArrowRight,
-} from 'lucide-react'
+} from "lucide-react";
 
-import { useCart } from '../context/CartContext'
+import { useCart } from "../context/CartContext";
 
 export const Cart = () => {
-  const {
-    cartItems,
-    cartCount,
-    updateQuantity,
-    removeFromCart,
-    clearCart,
-  } = useCart()
+  const { cartItems, cartCount, updateQuantity, removeFromCart, clearCart } =
+    useCart();
 
   // Calculate subtotal
   const subtotal = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
-    0
-  )
+    0,
+  );
 
   // For now, shipping is free
-  const shipping = 0
+  const shipping = 0;
 
-  const total = subtotal + shipping
+  const total = subtotal + shipping;
 
   return (
     <div className="mx-auto min-h-screen max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-
       {/* Page heading */}
       <div className="mb-8">
         <Link
@@ -56,7 +49,7 @@ export const Cart = () => {
 
           {cartItems.length > 0 && (
             <p className="text-sm font-medium text-gray-500">
-              {cartCount} {cartCount === 1 ? 'item' : 'items'} in your cart
+              {cartCount} {cartCount === 1 ? "item" : "items"} in your cart
             </p>
           )}
         </div>
@@ -74,8 +67,8 @@ export const Cart = () => {
           </h2>
 
           <p className="mt-2 max-w-sm text-sm text-gray-500">
-            Looks like you haven't added anything to your cart yet.
-            Explore our products and find something you love.
+            Looks like you haven't added anything to your cart yet. Explore our
+            products and find something you love.
           </p>
 
           <Link
@@ -88,7 +81,6 @@ export const Cart = () => {
         </div>
       ) : (
         <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,1fr)_360px]">
-
           {/* Cart products */}
           <section className="min-w-0">
             <div className="mb-4 flex items-center justify-between">
@@ -157,16 +149,18 @@ export const Cart = () => {
                           {item.quantity}
                         </span>
 
-                     <button
-  onClick={() => updateQuantity(item.id, item.quantity + 1)}
-  disabled={item.quantity >= 10}
-  aria-label="Increase quantity"
-  className="p-2 text-gray-600 transition hover:text-blue-600 disabled:cursor-not-allowed disabled:opacity-30"
->
-  <Plus size={15} />
-</button>
+                        <button
+                          onClick={() =>
+                            updateQuantity(item.id, item.quantity + 1)
+                          }
+                          disabled={item.quantity >= 10}
+                          aria-label="Increase quantity"
+                          className="p-2 text-gray-600 transition hover:text-blue-600 disabled:cursor-not-allowed disabled:opacity-30"
+                        >
+                          <Plus size={15} />
+                        </button>
 
-{/* {item.quantity >= 10 && (
+                        {/* {item.quantity >= 10 && (
   <p className="mt-2 text-xs text-amber-600">
     Maximum 10 items allowed
   </p>
@@ -185,9 +179,7 @@ export const Cart = () => {
 
                   {/* Item total */}
                   <div className="flex items-center justify-between border-t border-gray-100 pt-3 sm:block sm:border-0 sm:pt-0 sm:text-right">
-                    <p className="text-xs text-gray-400 sm:mb-1">
-                      Item total
-                    </p>
+                    <p className="text-xs text-gray-400 sm:mb-1">Item total</p>
                     <p className="text-base font-bold text-gray-900">
                       ${(item.price * item.quantity).toFixed(2)}
                     </p>
@@ -199,9 +191,7 @@ export const Cart = () => {
 
           {/* Order summary */}
           <aside className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm lg:sticky lg:top-6">
-            <h2 className="text-lg font-bold text-gray-900">
-              Order Summary
-            </h2>
+            <h2 className="text-lg font-bold text-gray-900">Order Summary</h2>
 
             <div className="mt-6 space-y-4">
               <div className="flex justify-between text-sm">
@@ -215,16 +205,12 @@ export const Cart = () => {
 
               <div className="flex justify-between text-sm">
                 <span className="text-gray-500">Shipping</span>
-                <span className="font-medium text-green-600">
-                  Free
-                </span>
+                <span className="font-medium text-green-600">Free</span>
               </div>
 
               <div className="border-t border-gray-200 pt-4">
                 <div className="flex justify-between">
-                  <span className="font-semibold text-gray-900">
-                    Total
-                  </span>
+                  <span className="font-semibold text-gray-900">Total</span>
                   <span className="text-xl font-bold text-gray-900">
                     ${total.toFixed(2)}
                   </span>
@@ -260,5 +246,5 @@ export const Cart = () => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};

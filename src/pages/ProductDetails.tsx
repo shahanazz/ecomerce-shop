@@ -1,6 +1,5 @@
-
-import { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   ArrowLeft,
   ArrowRight,
@@ -12,70 +11,66 @@ import {
   ShoppingBag,
   Star,
   Truck,
-} from 'lucide-react'
+} from "lucide-react";
 
-import type { Product } from '../types/product'
-import { useCart } from '../context/CartContext'
+import type { Product } from "../types/product";
+import { useCart } from "../context/CartContext";
 
 interface ProductDetailsResponse {
-  id: number
-  title: string
-  category: string
-  description: string
-  price: number
-  discountPercentage: number
-  thumbnail: string
-  rating: number
-  brand?: string
-  stock: number
-  images: string[]
-  availabilityStatus?: string
-  shippingInformation?: string
-  warrantyInformation?: string
-  returnPolicy?: string
+  id: number;
+  title: string;
+  category: string;
+  description: string;
+  price: number;
+  discountPercentage: number;
+  thumbnail: string;
+  rating: number;
+  brand?: string;
+  stock: number;
+  images: string[];
+  availabilityStatus?: string;
+  shippingInformation?: string;
+  warrantyInformation?: string;
+  returnPolicy?: string;
 }
 
 export const ProductDetails = () => {
-  const { id } = useParams()
-  const navigate = useNavigate()
-  const { addToCart } = useCart()
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { addToCart } = useCart();
 
-  const [product, setProduct] = useState<ProductDetailsResponse | null>(null)
-  const [selectedImage, setSelectedImage] = useState('')
-  const [quantity, setQuantity] = useState(1)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const [product, setProduct] = useState<ProductDetailsResponse | null>(null);
+  const [selectedImage, setSelectedImage] = useState("");
+  const [quantity, setQuantity] = useState(1);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        setLoading(true)
-        setError(null)
+        setLoading(true);
+        setError(null);
 
-        const response = await fetch(
-          `https://dummyjson.com/products/${id}`
-        )
+        const response = await fetch(`https://dummyjson.com/products/${id}`);
 
         if (!response.ok) {
-          throw new Error('Unable to find this product.')
+          throw new Error("Unable to find this product.");
         }
 
-        const data: ProductDetailsResponse = await response.json()
+        const data: ProductDetailsResponse = await response.json();
 
-        setProduct(data)
-        setSelectedImage(data.images?.[0] || data.thumbnail)
-        setQuantity(1)
+        setProduct(data);
+        setSelectedImage(data.images?.[0] || data.thumbnail);
+        setQuantity(1);
       } catch (err) {
-        setError(
-          err instanceof Error ? err.message : 'Something went wrong.'
-        )
+        setError(err instanceof Error ? err.message : "Something went wrong.");
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    if (id) fetchProduct()
-  }, [id])
+    if (id) fetchProduct();
+  }, [id]);
 
   // Loading state
   if (loading) {
@@ -94,18 +89,16 @@ export const ProductDetails = () => {
           </div>
         </div>
       </div>
-    )
+    );
   }
 
   // Error state
   if (error || !product) {
     return (
       <div className="mx-auto max-w-7xl px-4 py-24 text-center">
-        <h2 className="text-2xl font-bold text-gray-900">
-          Product not found
-        </h2>
+        <h2 className="text-2xl font-bold text-gray-900">Product not found</h2>
         <p className="mt-3 text-gray-500">
-          {error || 'This product is unavailable.'}
+          {error || "This product is unavailable."}
         </p>
         <Link
           to="/"
@@ -115,7 +108,7 @@ export const ProductDetails = () => {
           Back to shop
         </Link>
       </div>
-    )
+    );
   }
 
   const cartProduct: Product = {
@@ -125,33 +118,30 @@ export const ProductDetails = () => {
     description: product.description,
     price: product.price,
     originalPrice: Number(
-      (product.price / (1 - product.discountPercentage / 100)).toFixed(2)
+      (product.price / (1 - product.discountPercentage / 100)).toFixed(2),
     ),
     image: product.thumbnail,
     rating: product.rating,
-  }
+  };
 
-  const discount = Math.round(product.discountPercentage)
+  const discount = Math.round(product.discountPercentage);
   const images =
-    product.images?.length > 0
-      ? product.images
-      : [product.thumbnail]
+    product.images?.length > 0 ? product.images : [product.thumbnail];
 
-  const isInStock = product.stock > 0
+  const isInStock = product.stock > 0;
 
   const handleAddToCart = () => {
-    addToCart(cartProduct, quantity)
-  }
+    addToCart(cartProduct, quantity);
+  };
 
   const handleBuyNow = () => {
-    addToCart(cartProduct, quantity)
-    navigate('/cart')
-  }
+    addToCart(cartProduct, quantity);
+    navigate("/cart");
+  };
 
   return (
     <main className="min-h-screen bg-white">
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-
         {/* Breadcrumb */}
         <nav className="mb-8 flex flex-wrap items-center gap-2 text-sm text-gray-400">
           <Link to="/" className="transition hover:text-blue-600">
@@ -167,7 +157,6 @@ export const ProductDetails = () => {
 
         {/* Main Product Section */}
         <section className="grid gap-10 lg:grid-cols-2 lg:gap-16">
-
           {/* Product Gallery */}
           <div>
             <div className="group relative flex aspect-square items-center justify-center overflow-hidden rounded-3xl border border-gray-100 bg-gray-50 p-8 sm:p-12">
@@ -202,8 +191,8 @@ export const ProductDetails = () => {
                     onClick={() => setSelectedImage(image)}
                     className={`flex h-20 w-20 shrink-0 items-center justify-center rounded-xl border-2 bg-gray-50 p-2 transition ${
                       selectedImage === image
-                        ? 'border-blue-600'
-                        : 'border-transparent hover:border-gray-300'
+                        ? "border-blue-600"
+                        : "border-transparent hover:border-gray-300"
                     }`}
                   >
                     <img
@@ -219,7 +208,6 @@ export const ProductDetails = () => {
 
           {/* Product Information */}
           <div className="flex flex-col py-2">
-
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-600">
               {product.category}
             </p>
@@ -230,7 +218,10 @@ export const ProductDetails = () => {
 
             {product.brand && (
               <p className="mt-3 text-sm text-gray-500">
-                Brand: <span className="font-semibold text-gray-800">{product.brand}</span>
+                Brand:{" "}
+                <span className="font-semibold text-gray-800">
+                  {product.brand}
+                </span>
               </p>
             )}
 
@@ -242,9 +233,7 @@ export const ProductDetails = () => {
                   {product.rating}
                 </span>
               </div>
-              <span className="text-sm text-gray-400">
-                Customer rating
-              </span>
+              <span className="text-sm text-gray-400">Customer rating</span>
             </div>
 
             <div className="my-7 border-t border-gray-100" />
@@ -256,11 +245,12 @@ export const ProductDetails = () => {
                   ${product.price.toFixed(2)}
                 </span>
 
-                {discount > 0 && (
+                {cartProduct.originalPrice !== undefined && discount > 0 && (
                   <>
                     <span className="text-lg text-gray-400 line-through">
                       ${cartProduct.originalPrice.toFixed(2)}
                     </span>
+
                     <span className="rounded-md bg-green-50 px-2.5 py-1 text-xs font-bold text-green-700">
                       Save {discount}%
                     </span>
@@ -281,17 +271,17 @@ export const ProductDetails = () => {
             <div className="mt-7 flex items-center gap-2">
               <span
                 className={`h-2.5 w-2.5 rounded-full ${
-                  isInStock ? 'bg-green-500' : 'bg-red-500'
+                  isInStock ? "bg-green-500" : "bg-red-500"
                 }`}
               />
               <span
                 className={`text-sm font-semibold ${
-                  isInStock ? 'text-green-700' : 'text-red-600'
+                  isInStock ? "text-green-700" : "text-red-600"
                 }`}
               >
                 {isInStock
-                  ? product.availabilityStatus || 'In stock'
-                  : 'Out of stock'}
+                  ? product.availabilityStatus || "In stock"
+                  : "Out of stock"}
               </span>
               {isInStock && (
                 <span className="text-sm text-gray-400">
@@ -361,7 +351,8 @@ export const ProductDetails = () => {
                     Delivery Information
                   </p>
                   <p className="mt-1 text-xs leading-5 text-gray-500">
-                    {product.shippingInformation || 'Shipping information available at checkout.'}
+                    {product.shippingInformation ||
+                      "Shipping information available at checkout."}
                   </p>
                 </div>
               </div>
@@ -369,13 +360,17 @@ export const ProductDetails = () => {
               <div className="border-t border-gray-100" />
 
               <div className="flex items-start gap-3">
-                <ShieldCheck size={20} className="mt-0.5 shrink-0 text-gray-500" />
+                <ShieldCheck
+                  size={20}
+                  className="mt-0.5 shrink-0 text-gray-500"
+                />
                 <div>
                   <p className="text-sm font-semibold text-gray-800">
                     Warranty & Returns
                   </p>
                   <p className="mt-1 text-xs leading-5 text-gray-500">
-                    {product.warrantyInformation || 'Warranty information not available.'}
+                    {product.warrantyInformation ||
+                      "Warranty information not available."}
                     {product.returnPolicy && ` ${product.returnPolicy}`}
                   </p>
                 </div>
@@ -395,7 +390,6 @@ export const ProductDetails = () => {
                 </div>
               </div>
             </div>
-
           </div>
         </section>
 
@@ -416,8 +410,7 @@ export const ProductDetails = () => {
             Continue shopping
           </Link>
         </section>
-
       </div>
     </main>
-  )
-}
+  );
+};

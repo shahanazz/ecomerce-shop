@@ -16,7 +16,7 @@ export const Navbar = () => {
 
   const { cartCount } = useCart()
   const navigate = useNavigate()
-  const [searchParams, setSearchParams] = useSearchParams()
+const [, setSearchParams] = useSearchParams()
 
   const navLinks = [
     { name: 'Home', path: '/' },

@@ -1,8 +1,6 @@
 import axios from 'axios'
-import type {
-  Product,
-  ProductsResponse,
-} from '../types/product'
+
+import type { Product, ProductsResponse } from '../types/product'
 
 const API_URL = 'https://dummyjson.com'
 
@@ -24,9 +22,11 @@ export const getProducts = async (): Promise<Product[]> => {
       name: item.title,
       category: item.category,
       description: item.description,
-      price: discountedPrice,
+      price: Number(discountedPrice.toFixed(2)),
       originalPrice:
-        item.discountPercentage > 0 ? originalPrice : undefined,
+        item.discountPercentage > 0
+          ? originalPrice
+          : undefined,
       image: item.thumbnail,
       rating: item.rating,
     }

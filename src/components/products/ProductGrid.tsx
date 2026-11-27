@@ -13,7 +13,6 @@ interface ProductGridProps {
 const ProductGrid = ({
   products,
   loading,
-  error,
   addToCart
 }: ProductGridProps) => {
 

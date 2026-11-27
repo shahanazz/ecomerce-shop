@@ -62,17 +62,17 @@ export const ProductCard = ({ product, addToCart }: ProductCardProps) => {
           </span>
         </div>
 
-        <div className="mt-4 flex items-center gap-2">
-          <span className="text-lg font-bold text-gray-900">
-            ${product.price.toFixed(2)}
-          </span>
+       <div className="flex items-center gap-2">
+  <span className="font-semibold">
+    ₹{product.price}
+  </span>
 
-          {product.originalPrice && (
-            <span className="text-sm text-gray-400 line-through">
-              ${product.originalPrice.toFixed(2)}
-            </span>
-          )}
-        </div>
+  {product.originalPrice !== undefined && (
+    <span className="text-gray-400 line-through text-sm">
+      ₹{product.originalPrice}
+    </span>
+  )}
+</div>
 
 <button
   onClick={() => addToCart(product)}
