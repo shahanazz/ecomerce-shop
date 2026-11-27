@@ -43,7 +43,7 @@ export default function ProductListingLayout({
 
   return (
     <section className="py-6">
-      {/* Page heading */}
+  
       <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">
@@ -55,7 +55,7 @@ export default function ProductListingLayout({
           </p>
         </div>
 
-        {/* Search and sorting can be implemented later */}
+      
         <div className="flex items-center gap-3">
           <label
             htmlFor="sort"
@@ -89,9 +89,9 @@ export default function ProductListingLayout({
         </button>
       </div>
 
-      {/* Sidebar and product grid */}
+      
       <div className="grid grid-cols-1 gap-6 md:grid-cols-[210px_minmax(0,1fr)] lg:grid-cols-[250px_minmax(0,1fr)] lg:gap-8">
-        {/* Filter sidebar */}
+
         <aside className={`${showFilters ? "block" : "hidden"} md:block`}>
           <ProductFilters
             selectedCategory={selectedCategory}
